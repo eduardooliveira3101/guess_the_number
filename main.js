@@ -3,6 +3,7 @@ const screen2 = document.querySelector(".screen2");
 const btnTry = document.querySelector("#btnTry");
 const btnAgain = document.querySelector("#btnAgain");
 const inputNumber = document.querySelector("#inputNumber")
+const tryagainMessage = document.querySelector(".tryagain")
 let randomNumber = Math.round(Math.random() * 10);
 
 let xAttempts = 0;
@@ -23,9 +24,17 @@ function handleTryclick(event) {
 
   if (Number(inputNumber.value) == randomNumber) {
     toggleScreen()
-  } 
-  else if (Number(inputNumber.value) == '') {
+  } else if (Number(inputNumber.value) == '') {
     alert("Digite um número")
+  } else if (Number(inputNumber.value) != randomNumber) {
+    
+    tryagainMessage.classList.remove("hide")
+    tryagainMessage.style.opacity = 1;
+    setTimeout(function () {
+      tryagainMessage.style.opacity = 0;
+      btnTry.addAttribute("disabled")
+      inputNumber.addAttribute("disabled")
+    }, 3000) 
   }
 
   xAttempts++
@@ -43,7 +52,6 @@ function handleAgainclick() {
   toggleScreen()
   xAttempts = 1;
   randomNumber = Math.round(Math.random() * 10);
-
 }
 
 function toggleScreen() {
